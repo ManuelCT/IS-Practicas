@@ -42,11 +42,12 @@ void setBulletPosition(int & iBulletPos, unsigned int & iBulletDirection, char *
 	}
 }
 
-//Sets enemy positions or resets its position
-void setEnemyPosition(unsigned int & iEnemyPos, unsigned int & iEnemyDirection, int & iBulletPos, unsigned int & iBulletDirection, char * cWorld) {
+//Sets enemy positions or resets its position and adds 1 to score
+void setEnemyPosition(unsigned int & iEnemyPos, unsigned int & iEnemyDirection, int & iBulletPos, unsigned int & iBulletDirection, unsigned int & iScore, char * cWorld) {
 	if (abs(static_cast<int>(iEnemyPos-iBulletPos)) <= 1) {
 		resetBullet(iBulletPos, iBulletDirection, cWorld);
 		resetEnemy(iEnemyPos, iEnemyDirection, cWorld);
+		++iScore;
 	}
 	else if (iEnemyDirection == 1) {
 		if (iEnemyPos != 0) {
@@ -78,10 +79,11 @@ bool checkPlayer(unsigned int & iPlayerPos, unsigned int & iEnemyPos) {
 
 int main() {
 	//VARIABLES DECLARATION
-	char cWorld[WORLD_WIDTH + 1];
+	char * cWorld = new char [WORLD_WIDTH + 1];
 	char cKey;
 	unsigned int iPlayerPos = PLAYER_INITIAL_POSITION;
 	int iBulletPos;
+	unsigned int iScore = 0;
 	unsigned int iEnemyPos = 0;
 	unsigned int iBulletDirection = 0; //0 -> No Bullet. 1 -> Left Direction Bullet. 2 -> Right Direction Bullet.
 	unsigned int iEnemyDirection = 0; //0 -> No Enemy. 1 -> Left Direction Enemy. 2 -> Right Direction Enemy.
@@ -97,7 +99,7 @@ int main() {
 
 	cWorld[WORLD_WIDTH] = '\0';
 	cWorld[iPlayerPos] = PLAYER_SYMBOL;
-	printf("\n\n\n\n%s", cWorld);
+	printf("Score: %d\n\n\n\n%s", iScore, cWorld);
 
 	//GAME LOOP
 	while (checkPlayer(iPlayerPos, iEnemyPos)) {
@@ -136,7 +138,7 @@ int main() {
 		setBulletPosition(iBulletPos, iBulletDirection, cWorld);
 
 		if (iEnemyDirection != 0) {
-			setEnemyPosition(iEnemyPos, iEnemyDirection, iBulletPos, iBulletDirection, cWorld);
+			setEnemyPosition(iEnemyPos, iEnemyDirection, iBulletPos, iBulletDirection, iScore, cWorld);
 		}
 
 		if (iBulletPos == 0 || iBulletPos == (WORLD_WIDTH - 1)) {
@@ -144,12 +146,13 @@ int main() {
 		}
 
 		system("cls");
-		printf("\n\n\n\n%s", cWorld);
+		printf("Score: %d\n\n\n\n%s", iScore, cWorld);
 
 		Sleep(200);
 	}
 	system("cls");
-	printf("GAME OVER");
+	printf("GAME OVER\n\n\n\nScore: %d", iScore);
+	delete[] cWorld;
 	getchar();
 	return 0;
 }
