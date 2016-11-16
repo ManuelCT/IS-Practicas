@@ -43,13 +43,8 @@ void setBulletPosition(int & iBulletPos, unsigned int & iBulletDirection, char *
 }
 
 //Sets enemy positions or resets its position and adds 1 to score
-void setEnemyPosition(unsigned int & iEnemyPos, unsigned int & iEnemyDirection, int & iBulletPos, unsigned int & iBulletDirection, unsigned int & iScore, char * cWorld) {
-	if (abs(static_cast<int>(iEnemyPos-iBulletPos)) <= 1) {
-		resetBullet(iBulletPos, iBulletDirection, cWorld);
-		resetEnemy(iEnemyPos, iEnemyDirection, cWorld);
-		++iScore;
-	}
-	else if (iEnemyDirection == 1) {
+void setEnemyPosition(unsigned int & iEnemyPos, unsigned int & iEnemyDirection, char * cWorld) {
+	if (iEnemyDirection == 1) {
 		if (iEnemyPos != 0) {
 			--iEnemyPos;
 			cWorld[iEnemyPos] = ENEMY_SYMBOL;
@@ -66,6 +61,15 @@ void setEnemyPosition(unsigned int & iEnemyPos, unsigned int & iEnemyDirection, 
 		}
 		else
 			resetEnemy(iEnemyPos, iEnemyDirection, cWorld);
+	}
+}
+
+//Checks if a bullets has hit the enemy
+void checkEnemy(unsigned int & iEnemyPos, unsigned int & iEnemyDirection, int & iBulletPos, unsigned int & iBulletDirection, unsigned int & iScore, char * cWorld) {
+	if (abs(static_cast<int>(iEnemyPos - iBulletPos)) <= 1) {
+		resetBullet(iBulletPos, iBulletDirection, cWorld);
+		resetEnemy(iEnemyPos, iEnemyDirection, cWorld);
+		++iScore;
 	}
 }
 
@@ -138,12 +142,14 @@ int main() {
 		setBulletPosition(iBulletPos, iBulletDirection, cWorld);
 
 		if (iEnemyDirection != 0) {
-			setEnemyPosition(iEnemyPos, iEnemyDirection, iBulletPos, iBulletDirection, iScore, cWorld);
+			setEnemyPosition(iEnemyPos, iEnemyDirection, cWorld);
 		}
 
 		if (iBulletPos == 0 || iBulletPos == (WORLD_WIDTH - 1)) {
 			resetBullet(iBulletPos, iBulletDirection, cWorld);
 		}
+
+		checkEnemy(iEnemyPos, iEnemyDirection, iBulletPos, iBulletDirection, iScore, cWorld);
 
 		system("cls");
 		printf("Score: %d\n\n\n\n%s", iScore, cWorld);
@@ -153,6 +159,7 @@ int main() {
 	system("cls");
 	printf("GAME OVER\n\n\n\nScore: %d", iScore);
 	delete[] cWorld;
+	cWorld = NULL;
 	getchar();
 	return 0;
 }
