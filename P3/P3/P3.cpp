@@ -38,7 +38,7 @@ int main() {
 
 		cWorld[iPlayerPos] = PLAYER_SYMBOL;
 
-		updateWeather(&vDrops, iPlayerPos, iEnemyPos, iBulletPos, cWorld);
+		updateWeather(vDrops, iPlayerPos, iEnemyPos, iBulletPos, cWorld);
 
 		checkEnemy(iEnemyPos, iEnemyDirection, iBulletPos, iBulletDirection, iScore, cWorld);
 

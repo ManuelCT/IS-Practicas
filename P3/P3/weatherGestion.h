@@ -13,6 +13,6 @@ struct Drop {
 	unsigned int iAge;
 };
 
-void updateWeather(std::vector<struct Drop> * vDrops, unsigned int & iPlayerPos, unsigned int & iEnemyPos, int & iBulletPos, char * cWorld);
+void updateWeather(std::vector<struct Drop> & vDrops, unsigned int & iPlayerPos, unsigned int & iEnemyPos, int & iBulletPos, char * cWorld);
 
 #endif // !__WEATHERGESTION_H__
