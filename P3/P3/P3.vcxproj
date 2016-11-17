@@ -145,29 +145,31 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="bulletGestion.h" />
+    <ClInclude Include="bulletManagement.h" />
     <ClInclude Include="colisions.h" />
-    <ClInclude Include="enemyGestion.h" />
+    <ClInclude Include="enemyManagement.h" />
     <ClInclude Include="keyControl.h" />
     <ClInclude Include="playerValues.h" />
+    <ClInclude Include="scoreManagement.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="weatherGestion.h" />
+    <ClInclude Include="weatherManagement.h" />
     <ClInclude Include="worldValues.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="bulletGestion.cpp" />
+    <ClCompile Include="bulletManagement.cpp" />
     <ClCompile Include="colisions.cpp" />
-    <ClCompile Include="enemyGestion.cpp" />
+    <ClCompile Include="enemyManagement.cpp" />
     <ClCompile Include="keyControl.cpp" />
     <ClCompile Include="P3.cpp" />
+    <ClCompile Include="scoreManagement.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="weatherGestion.cpp" />
+    <ClCompile Include="weatherManagement.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

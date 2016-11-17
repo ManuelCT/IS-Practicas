@@ -24,9 +24,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="worldValues.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="colisions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -34,6 +31,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="playerValues.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="worldValues.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="bulletManagement.h">
@@ -48,12 +48,15 @@
     <ClInclude Include="weatherManagement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="worldManagement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="P3.cpp">
+    <ClCompile Include="P4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="colisions.cpp">
@@ -72,6 +75,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="weatherManagement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="worldManagement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

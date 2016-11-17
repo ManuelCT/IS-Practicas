@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "enemyGestion.h"
+#include "enemyManagement.h"
 #include "worldValues.h"
 
 void resetEnemy(unsigned int & iEnemyPos, unsigned int & iEnemyDirection, char * cWorld) {

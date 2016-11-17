@@ -1,7 +1,5 @@
 #include "stdafx.h"
 #include "keyControl.h"
-#include "worldValues.h"
-#include "playerValues.h"
 
 void keyControl(char cKey, unsigned int & iPlayerPos, int & iBulletPos, unsigned int & iBulletDirection, char * cWorld) {
 	if (cKey == KEY_LEFT_MOVE) {

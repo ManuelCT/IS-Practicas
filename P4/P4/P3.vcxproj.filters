@@ -24,7 +24,13 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="enemyGestion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="worldValues.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bulletGestion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="colisions.h">
@@ -36,16 +42,10 @@
     <ClInclude Include="playerValues.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="bulletManagement.h">
+    <ClInclude Include="weatherGestion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="enemyManagement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="scoreManagement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="weatherManagement.h">
+    <ClInclude Include="scoreGestion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -56,22 +56,22 @@
     <ClCompile Include="P3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="enemyGestion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bulletGestion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="colisions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="keyControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="bulletManagement.cpp">
+    <ClCompile Include="weatherGestion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="enemyManagement.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="scoreManagement.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="weatherManagement.cpp">
+    <ClCompile Include="scoreGestion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include <vector>
 #include "worldValues.h"
+#include "worldManagement.h"
 #include "enemyManagement.h"
 #include "bulletManagement.h"
 #include "colisions.h"
@@ -11,12 +12,9 @@
 
 int main() {
 	//VARIABLES DECLARATION
-	char * cWorld = new char[WORLD_WIDTH + 1];
 	char cKey;
 	unsigned int iPlayerPos = PLAYER_INITIAL_POSITION;
-	int iBulletPos;
 	unsigned int iEnemyPos = 0;
-	unsigned int iBulletDirection = 0; //0 -> No Bullet. 1 -> Left Direction Bullet. 2 -> Right Direction Bullet.
 	unsigned int iEnemyDirection = 0; //0 -> No Enemy. 1 -> Left Direction Enemy. 2 -> Right Direction Enemy.
 	srand(static_cast<unsigned int>(time(NULL)));
 
@@ -40,19 +38,15 @@ int main() {
 
 		checkEnemy(iEnemyPos, iEnemyDirection, iBulletPos, iBulletDirection, cWorld);
 
-		setBulletPosition(iBulletPos, iBulletDirection, cWorld);
+		updateBullets(cWorld);
 
 		if (_kbhit()) {
 			cKey = _getch();
-			keyControl(cKey, iPlayerPos, iBulletPos, iBulletDirection, cWorld);
+			keyControl(cKey, iPlayerPos, cWorld);
 		}
 
 		if (iEnemyDirection != 0) {
 			setEnemyPosition(iEnemyPos, iEnemyDirection, cWorld);
-		}
-
-		if (iBulletPos == 0 || iBulletPos == (WORLD_WIDTH - 1)) {
-			resetBullet(iBulletPos, iBulletDirection, cWorld);
 		}
 
 		system("cls");
@@ -60,8 +54,10 @@ int main() {
 
 		Sleep(50);
 	}
+
 	system("cls");
 	printf("GAME OVER\n\n\n\nScore: %d\n\n\n", getScore());
+
 	delete[] cWorld;
 	cWorld = NULL;
 	getchar();

@@ -1,6 +1,5 @@
 #include "stdafx.h"
-#include "bulletGestion.h"
-#include "worldValues.h"
+#include "bulletManagement.h"
 
 void resetBullet(int & iBulletPos, unsigned int & iBulletDirection, char * cWorld) {
 	cWorld[iBulletPos] = WORLD_SYMBOL;

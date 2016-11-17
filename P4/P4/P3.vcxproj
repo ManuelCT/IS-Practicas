@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F00FF0A7-69BA-4580-B8A4-C1C707C63E05}</ProjectGuid>
+    <ProjectGuid>{A73CB438-4F8D-420D-86D7-97642BDC76AB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>P1</RootNamespace>
+    <RootNamespace>P3</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -84,7 +84,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
@@ -142,17 +142,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
+    <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="P1.cpp" />
+    <ClInclude Include="bulletGestion.h" />
+    <ClInclude Include="colisions.h" />
+    <ClInclude Include="enemyGestion.h" />
+    <ClInclude Include="keyControl.h" />
+    <ClInclude Include="playerValues.h" />
+    <ClInclude Include="scoreGestion.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="weatherGestion.h" />
+    <ClInclude Include="worldValues.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="bulletGestion.cpp" />
+    <ClCompile Include="colisions.cpp" />
+    <ClCompile Include="enemyGestion.cpp" />
+    <ClCompile Include="keyControl.cpp" />
+    <ClCompile Include="P3.cpp" />
+    <ClCompile Include="scoreGestion.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="weatherGestion.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,16 +1,25 @@
 #include "stdafx.h"
-#include "weatherGestion.h"
+#include "weatherManagement.h"
 
-void updateWeather(std::vector<struct Drop> & vDrops, unsigned int & iPlayerPos, unsigned int & iEnemyPos, int & iBulletPos, char * cWorld) {
-	std::vector<struct Drop>::iterator dropsIterator;
-	std::vector<struct Drop> vNewDrops;
+//Stocks all existing drops
+static std::vector<Drop> vDrops;
 
-	if ((rand() % 10) < 2) {
+//Adds a new Drop in a random position
+static void newDrop() {
 		unsigned int iDropPos = rand() % (WORLD_WIDTH);
 		struct Drop stDrop;
 		stDrop.iAge = 0;
 		stDrop.iPosition = iDropPos;
 		vDrops.push_back(stDrop);
+}
+
+//Creates a new drops if conditions are accomplished and update all existing drops
+void updateWeather(char * cWorld) {
+	std::vector<Drop>::iterator dropsIterator;
+	std::vector<Drop> vNewDrops;
+
+	if ((rand() % 10) < 2) {
+		newDrop();
 	}
 
 	for (dropsIterator = vDrops.begin(); dropsIterator != vDrops.end(); dropsIterator++) {
