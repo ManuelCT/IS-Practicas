@@ -3,18 +3,36 @@
 
 
 //Checks if a bullets has hit the enemy
-void checkEnemy(unsigned int & iEnemyPos, unsigned int & iEnemyDirection, int & iBulletPos, unsigned int & iBulletDirection, char * cWorld) {
-	if (abs(static_cast<int>(iEnemyPos - iBulletPos)) <= 1) {
-		resetBullet(iBulletPos, iBulletDirection, cWorld);
-		resetEnemy(iEnemyPos, iEnemyDirection, cWorld);
-		addScore(1);
+void checkEnemiesKilled() {
+	std::vector<Enemy> pEnemies = gameWorld.getEnemies();
+	std::vector<Bullet> pBullets = gameWorld.getBullets();
+	std::vector<Bullet>::iterator bulletsIterator = pBullets.begin();
+	std::vector<Enemy>::iterator enemiesIterator = pEnemies.begin();
+
+	if (pEnemies.size() && pBullets.size() != 0) {
+		for (; bulletsIterator != pBullets.end(); bulletsIterator++) {
+			for (; enemiesIterator != pEnemies.end(); enemiesIterator++) {
+				if (abs(static_cast<int>(enemiesIterator->iPosition - bulletsIterator->iPosition)) <= 1) {
+					enemiesIterator->destroy = true;
+					bulletsIterator->destroy = true;
+					addScore(1);
+				}
+			}
+		}
 	}
 }
 
 //Checks if the player is still alive
-bool checkPlayer(unsigned int & iPlayerPos, unsigned int & iEnemyPos) {
-	if (abs(static_cast<int>(iEnemyPos - iPlayerPos)) <= 1) {
-		return false;
+bool checkPlayerAlive(unsigned int & iPlayerPos) {
+	std::vector<Enemy> pEnemies = gameWorld.getEnemies();
+	std::vector<Enemy>::iterator enemiesIterator = pEnemies.begin();
+
+	if (gameWorld.getEnemies().size() != 0) {
+		for (; enemiesIterator != pEnemies.end(); enemiesIterator++) {
+			if (abs(static_cast<int>(enemiesIterator->iPosition - iPlayerPos)) <= 1) {
+				return false;
+			}
+		}
 	}
 	return true;
 }

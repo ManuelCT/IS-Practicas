@@ -3,7 +3,17 @@
 
 #define ENEMY_SYMBOL 'X'
 
-void resetEnemy(unsigned int & iEnemyPos, unsigned int & iEnemyDirection, char * cWorld);
-void setEnemyPosition(unsigned int & iEnemyPos, unsigned int & iEnemyDirection, char * cWorld);
+#include <vector>
+#include "worldManagement.h"
+#include "worldValues.h"
+
+struct Enemy {
+	unsigned int iPosition;
+	unsigned int iDirection; //0 -> No Bullet. 1 -> Left Direction Bullet. 2 -> Right Direction Bullet.
+	bool destroy = false;
+};
+
+void newEnemy();
+void updateEnemies();
 
 #endif // !__ENEMYMANAGEMENT_H__

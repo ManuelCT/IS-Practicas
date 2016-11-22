@@ -1,12 +1,13 @@
 #ifndef __COLISIONS_H__
 #define __COLISIONS_H__
 
+#include "worldManagement.h"
 #include "enemyManagement.h"
 #include "bulletManagement.h"
 #include "worldValues.h"
 #include "scoreManagement.h"
 
-void checkEnemy(unsigned int & iEnemyPos, unsigned int & iEnemyDirection, int & iBulletPos, unsigned int & iBulletDirection, char * cWorld);
-bool checkPlayer(unsigned int & iPlayerPos, unsigned int & iEnemyPos);
+void checkEnemiesKilled();
+bool checkPlayerAlive(unsigned int & iPlayerPos);
 
 #endif // !__COLISIONS_H__

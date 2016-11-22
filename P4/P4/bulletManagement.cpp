@@ -1,31 +1,47 @@
 #include "stdafx.h"
 #include "bulletManagement.h"
 
-void addBullet(Bullet sBullet) {
-	cWorld.vBullets.push_back(sBullet);
+void newBullet(Bullet sBullet) {
+	gameWorld.addBullet(sBullet);
 }
 
-void updateBullets(char * cWorld) {
-	std::vector<Bullet>::iterator bulletsIterator;
-	std::vector<Bullet> vNewBullets;
+void updateBullets() {
+	if (gameWorld.getBullets().size() != 0) {
+		std::vector<Bullet> pBullets = gameWorld.getBullets();
+		std::vector<Bullet>::iterator bulletsIterator = pBullets.begin();
+		std::vector<Bullet> vNewbullets;
+		Bullet sBullet;
 
-	for (bulletsIterator = cWorld.vBullets.begin(); bulletsIterator != cWorld.vBullets.end(); bulletsIterator++) {
-		if (bulletsIterator->iPosition == 0 || bulletsIterator->iPosition == (WORLD_WIDTH - 1)) {
-			cWorld[bulletsIterator->iPosition] = WORLD_SYMBOL;
+		for (; bulletsIterator != pBullets.end(); bulletsIterator++) {
+			if (bulletsIterator->iPosition == 0 || bulletsIterator->iPosition == (WORLD_WIDTH - 1) && bulletsIterator->destroy == true) {
+				gameWorld.changePositionSymbol(bulletsIterator->iPosition, WORLD_SYMBOL);
+				if (bulletsIterator->iDirection == 1) {
+					gameWorld.changePositionSymbol(bulletsIterator->iPosition + 1, WORLD_SYMBOL);
+				}
+				else {
+					gameWorld.changePositionSymbol(bulletsIterator->iPosition - 1, WORLD_SYMBOL);
+				}
+					
+			}
+			else if (bulletsIterator->iDirection == 1) {
+				gameWorld.changePositionSymbol(bulletsIterator->iPosition, BULLET_SYMBOL);
+				gameWorld.changePositionSymbol(bulletsIterator->iPosition + 1, WORLD_SYMBOL);
+				sBullet.iPosition = bulletsIterator->iPosition - 1;
+				sBullet.iDirection = 1;
+				vNewbullets.push_back(sBullet);
+			}
+			else if (bulletsIterator->iDirection == 2) {
+				gameWorld.changePositionSymbol(bulletsIterator->iPosition, BULLET_SYMBOL);
+				gameWorld.changePositionSymbol(bulletsIterator->iPosition - 1, WORLD_SYMBOL);
+				sBullet.iPosition = bulletsIterator->iPosition + 1;
+				sBullet.iDirection = 2;
+				vNewbullets.push_back(sBullet);
+			}
 		}
-		else if (bulletsIterator->iDirection == 1) {
-			cWorld[bulletsIterator->iPosition] = BULLET_SYMBOL;
-			cWorld[bulletsIterator->iPosition + 1] = WORLD_SYMBOL;
-			vNewBullets.push_back({ bulletsIterator->iPosition - 1, bulletsIterator->iDirection });
-		}
-		else if (bulletsIterator->iDirection == 2) {
-			cWorld[bulletsIterator->iPosition] = BULLET_SYMBOL;
-			cWorld[bulletsIterator->iPosition + 1] = WORLD_SYMBOL;
-			vNewBullets.push_back({ bulletsIterator->iPosition + 1, bulletsIterator->iDirection });
-		}
+
+		gameWorld.setBullets(vNewbullets);
+		vNewbullets.clear();
+		pBullets.clear();
 	}
 
-	vBullets.clear();
-	vBullets = vNewBullets;
-	vNewBullets.clear();
 }

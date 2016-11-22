@@ -10,47 +10,45 @@
 #include "weatherManagement.h"
 #include "scoreManagement.h"
 
+class World gameWorld(WORLD_WIDTH);
+
 int main() {
 	//VARIABLES DECLARATION
 	char cKey;
 	unsigned int iPlayerPos = PLAYER_INITIAL_POSITION;
-	unsigned int iEnemyPos = 0;
-	unsigned int iEnemyDirection = 0; //0 -> No Enemy. 1 -> Left Direction Enemy. 2 -> Right Direction Enemy.
 	srand(static_cast<unsigned int>(time(NULL)));
 
 	//WORLD INITIALITATION
-	for (unsigned int i = 0; i < WORLD_WIDTH; ++i) {
-		printf("%d\n", i);
-		cWorld[i] = WORLD_SYMBOL;
-	}
 	initScore();
-	resetEnemy(iEnemyPos, iEnemyDirection, cWorld);
-	cWorld[WORLD_WIDTH] = '\0';
-	cWorld[iPlayerPos] = PLAYER_SYMBOL;
-	printf("Score: %d\n\n\n\n%s", getScore(), cWorld);
+	gameWorld.changePositionSymbol(iPlayerPos, PLAYER_SYMBOL);
+	gameWorld.printWorld(getScore());
 
 	//GAME LOOP
-	while (checkPlayer(iPlayerPos, iEnemyPos)) {
+	while (checkPlayerAlive(iPlayerPos)) {
 
-		cWorld[iPlayerPos] = PLAYER_SYMBOL;
+		gameWorld.changePositionSymbol(iPlayerPos, PLAYER_SYMBOL);
 
-		updateWeather(cWorld);
+		updateWeather();
 
-		checkEnemy(iEnemyPos, iEnemyDirection, iBulletPos, iBulletDirection, cWorld);
+		updateBullets();
+		
+		updateEnemies();
 
-		updateBullets(cWorld);
+		checkEnemiesKilled();
+
+		if ((rand() % 5) < 2) {
+			newEnemy();
+			printf("Nuevo ENEMIGO\n");
+		}
+			
 
 		if (_kbhit()) {
 			cKey = _getch();
-			keyControl(cKey, iPlayerPos, cWorld);
-		}
-
-		if (iEnemyDirection != 0) {
-			setEnemyPosition(iEnemyPos, iEnemyDirection, cWorld);
+			keyControl(cKey, iPlayerPos);
 		}
 
 		system("cls");
-		printf("Score: %d\n\n\n\n%s", getScore(), cWorld);
+		gameWorld.printWorld(getScore());
 
 		Sleep(50);
 	}
@@ -58,8 +56,6 @@ int main() {
 	system("cls");
 	printf("GAME OVER\n\n\n\nScore: %d\n\n\n", getScore());
 
-	delete[] cWorld;
-	cWorld = NULL;
 	getchar();
 	return 0;
 }

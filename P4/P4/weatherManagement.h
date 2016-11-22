@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "worldValues.h"
+#include "worldManagement.h"
 
 #define HIGH_DROP_SYMBOL  '\''
 #define MEDIUM_DROP_SYMBOL  '|'
@@ -14,6 +15,6 @@ struct Drop {
 };
 
 static void newDrop();
-void updateWeather(char * cWorld);
+void updateWeather();
 
 #endif // !__WEATHERMANAGEMENT_H__
