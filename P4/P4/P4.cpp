@@ -14,49 +14,54 @@ class World gameWorld(WORLD_WIDTH);
 
 int main() {
 	//VARIABLES DECLARATION
-	char cKey;
-	unsigned int iPlayerPos = PLAYER_INITIAL_POSITION;
+	char cKey = 't';
+	unsigned int iPlayerPos;
 	srand(static_cast<unsigned int>(time(NULL)));
 
+
+	while (playAgain(cKey)) {
 	//WORLD INITIALITATION
 	initScore();
+	iPlayerPos = PLAYER_INITIAL_POSITION;
 	gameWorld.changePositionSymbol(iPlayerPos, PLAYER_SYMBOL);
-	gameWorld.printWorld(getScore());
 
-	//GAME LOOP
-	while (checkPlayerAlive(iPlayerPos)) {
+		//GAME LOOP
+		while (checkPlayerAlive(iPlayerPos)) {
 
-		gameWorld.changePositionSymbol(iPlayerPos, PLAYER_SYMBOL);
+			gameWorld.changePositionSymbol(iPlayerPos, PLAYER_SYMBOL);
 
-		updateWeather();
+			updateWeather();
 
-		updateBullets();
-		
-		updateEnemies();
+			checkEnemiesKilled();
 
-		checkEnemiesKilled();
+			if ((rand() % 100) <= 5) {
+				newEnemy();
+			}
 
-		if ((rand() % 5) < 2) {
-			newEnemy();
-			printf("Nuevo ENEMIGO\n");
-		}
-			
 
-		if (_kbhit()) {
-			cKey = _getch();
-			keyControl(cKey, iPlayerPos);
+			if (_kbhit()) {
+				cKey = _getch();
+				keyControl(cKey, iPlayerPos);
+			}
+
+			system("cls");
+			gameWorld.printWorld(getScore());
+
+			updateBullets();
+
+			updateEnemies();
+
+			Sleep(50);
 		}
 
 		system("cls");
-		gameWorld.printWorld(getScore());
+		printf("GAME OVER\n\n\n\nScore: %d\n\n\nEnter x to exit\n", getScore());
 
-		Sleep(50);
+		scanf_s("%c", &cKey);
+
+		gameWorld.resetWorld(WORLD_WIDTH);
 	}
 
-	system("cls");
-	printf("GAME OVER\n\n\n\nScore: %d\n\n\n", getScore());
-
-	getchar();
 	return 0;
 }
 

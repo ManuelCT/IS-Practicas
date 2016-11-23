@@ -12,6 +12,6 @@
 #define KEY_RIGHT_SHOT 'e'
 
 void keyControl(char cKey, unsigned int & iPlayerPos);
-
+bool playAgain(char cKey);
 
 #endif // !__KEYCONTROL_H__

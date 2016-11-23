@@ -6,14 +6,15 @@ void newBullet(Bullet sBullet) {
 }
 
 void updateBullets() {
-	if (gameWorld.getBullets().size() != 0) {
-		std::vector<Bullet> pBullets = gameWorld.getBullets();
-		std::vector<Bullet>::iterator bulletsIterator = pBullets.begin();
+
+	if (gameWorld.sizeBullets() != 0) {
+		std::vector<Bullet>::iterator bulletsIterator = gameWorld.getBullets();
+		std::vector<Bullet>::iterator bulletsEnd = gameWorld.getLastBullet();
 		std::vector<Bullet> vNewbullets;
 		Bullet sBullet;
 
-		for (; bulletsIterator != pBullets.end(); bulletsIterator++) {
-			if (bulletsIterator->iPosition == 0 || bulletsIterator->iPosition == (WORLD_WIDTH - 1) && bulletsIterator->destroy == true) {
+		for (; bulletsIterator != bulletsEnd; bulletsIterator++) {
+			if (bulletsIterator->destroy == true || bulletsIterator->iPosition == 0 || bulletsIterator->iPosition == (WORLD_WIDTH - 1)) {
 				gameWorld.changePositionSymbol(bulletsIterator->iPosition, WORLD_SYMBOL);
 				if (bulletsIterator->iDirection == 1) {
 					gameWorld.changePositionSymbol(bulletsIterator->iPosition + 1, WORLD_SYMBOL);
@@ -41,7 +42,6 @@ void updateBullets() {
 
 		gameWorld.setBullets(vNewbullets);
 		vNewbullets.clear();
-		pBullets.clear();
 	}
 
 }

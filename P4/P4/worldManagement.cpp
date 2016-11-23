@@ -2,12 +2,12 @@
 #include "worldManagement.h"
 
 World::World(unsigned int iWorldWidth) {
-	cWorld = new char[WORLD_WIDTH + 1];
+	cWorld = new char[iWorldWidth + 1];
 
-	for (unsigned int i = 0; i < WORLD_WIDTH; ++i) {
+	for (unsigned int i = 0; i < iWorldWidth; ++i) {
 		changePositionSymbol(i, WORLD_SYMBOL);
 	}
-	cWorld[WORLD_WIDTH] = '\0';
+	cWorld[iWorldWidth] = '\0';
 }
 
 World::~World() {
@@ -17,17 +17,25 @@ World::~World() {
 }
 
 void World::changePositionSymbol(unsigned int iPosition, char cSymbol) {
-	if (iPosition <= 0 && iPosition >= (WORLD_WIDTH - 1))
 		cWorld[iPosition] = cSymbol;
 }
 
 void World::initWorld(unsigned int iWorldWidth) {
-	cWorld = new char[WORLD_WIDTH + 1];
+	cWorld = new char[iWorldWidth + 1];
 
-	for (unsigned int i = 0; i < WORLD_WIDTH; ++i) {
+	for (unsigned int i = 0; i < iWorldWidth; ++i) {
 		changePositionSymbol(i, WORLD_SYMBOL);
 	}
-	cWorld[WORLD_WIDTH] = '\0';
+	cWorld[iWorldWidth] = '\0';
+}
+
+void World::resetWorld(unsigned int iWorldWidth) {
+	for (unsigned int i = 0; i < iWorldWidth; ++i) {
+		changePositionSymbol(i, WORLD_SYMBOL);
+	}
+	cWorld[iWorldWidth] = '\0';
+	vBullets.clear();
+	vEnemies.clear();
 }
 
 void World::printWorld(int iScore) {
@@ -52,12 +60,20 @@ void World::setEnemies(std::vector<Enemy> newEnemies) {
 	vEnemies = newEnemies;
 }
 
-std::vector<Bullet> World::getBullets() {
-	return vBullets;
+std::vector<Bullet>::iterator World::getBullets() {
+	return vBullets.begin();
 }
 
-std::vector<Enemy> World::getEnemies() {
-	return vEnemies;
+std::vector<Enemy>::iterator World::getEnemies() {
+	return vEnemies.begin();
+}
+
+std::vector<Bullet>::iterator World::getLastBullet() {
+	return vBullets.end();
+}
+
+std::vector<Enemy>::iterator World::getLastEnemy() {
+	return vEnemies.end();
 }
 
 void World::clearBullets() {
@@ -66,4 +82,20 @@ void World::clearBullets() {
 
 void World::clearEnemies() {
 	vEnemies.clear();
+}
+
+void World::destroyBullet(std::vector<Bullet>::iterator bulletsIterator) {
+	bulletsIterator->destroy = true;
+}
+
+void World::destroyEnemy(std::vector<Enemy>::iterator enemiesIterator) {
+	enemiesIterator->destroy = true;
+}
+
+size_t World::sizeBullets() {
+	return vBullets.size();
+}
+
+size_t World::sizeEnemies() {
+	return vEnemies.size();
 }

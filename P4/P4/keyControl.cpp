@@ -11,7 +11,7 @@ void keyControl(char cKey, unsigned int & iPlayerPos) {
 		}
 	}
 	else if (cKey == KEY_RIGHT_MOVE) {
-		if (iPlayerPos != WORLD_WIDTH) {
+		if (iPlayerPos != (WORLD_WIDTH - 1)) {
 			++iPlayerPos;
 			gameWorld.changePositionSymbol(iPlayerPos, PLAYER_SYMBOL);
 			gameWorld.changePositionSymbol(iPlayerPos - 1, WORLD_SYMBOL);
@@ -31,4 +31,10 @@ void keyControl(char cKey, unsigned int & iPlayerPos) {
 			newBullet(sBullet);
 		}
 	}
+}
+
+bool playAgain(char cKey) {
+	if (cKey != 'x')
+		return true;
+	return false;
 }
